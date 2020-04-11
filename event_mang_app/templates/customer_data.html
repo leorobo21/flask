@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="mb-3">Data From {{ sender.sender }} ({{ data.total }})</h1>
+    {% for dat in data.items %}
+        <article class="media content-section">
+            <img  class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + dat.author.image_file) }}">
+          <div class="media-body">
+              <div class="article-metadata">
+              <a class="mr-2" href="{{ url_for('user_data', username=dat.author.username) }}">{{ dat.author.username }}</a>
+              <small class="text-muted">Created On: {{ dat.date_posted.strftime('%d-%m-%Y %Hhr %Mmin %Ssec') }}</small>
+              </div>
+              <div class="row">
+                  <small><a class="col-sm"  href="{{ url_for('data', data_id=dat.id) }}">Project Name: {{ dat.project_name }}</a></small>
+                  <small><a class="col-sm"  href="{{ url_for('data', data_id=dat.id) }}">System Name: {{ dat.system_name }}</a></small>
+                  <small><a class="col-sm"  href="{{ url_for('data', data_id=dat.id) }}">Loop_{{ dat.loop_num }}</a></small>
+                  <small><a class="col-sm"  href="{{ url_for('data', data_id=dat.id) }}">Type of file: {{ dat.type_file }}</a></small>
+              </div><br>
+              <p class="article-content">From: <a class="mr-2" href="{{ url_for('customer_data', sender=dat.sender) }}">{{ dat.sender }}</a></p>
+              <p class="article-content">File Location: {{ dat.file_path }}</p>
+              {#<small class="text-muted">File Last Modified: {{ dat.date_posted.strftime('%d-%m-%Y %Hhr %Mmin %Ssec') }}</small><br><br>#}
+              <p class="article-content">Description: {{ dat.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+    {% for page_num in data.iter_pages(left_edge=4, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if data.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('customer_data', sender=sender, page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('customer_data', sender=sender, page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

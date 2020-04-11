@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3>Search Page</h3>
+<div class="container mt-0 mb-0 sticky-top">
+        <form method="POST" action="" enctype="multipart/form-data" class="border-bottom">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group form-inline">
+                    <div class="form-group">
+                        {{ form.project_name.label(class="form-control-label mr-sm-4") }}
+                        {% if form.project_name.errors %}
+                            {{ form.project_name(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.project_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                        {% else %}
+                            {{ form.project_name(class="form-control mr-sm-1 input-sm form-control-sm w-50 ") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.system_name.label(class="form-control-label mr-sm-4") }}
+                        {% if form.system_name.errors %}
+                            {{ form.system_name(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.system_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                        {% else %}
+                            {{ form.system_name(class="form-control mr-sm-1 input-sm form-control-sm w-50") }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+
+                    <div class="form-group">
+                        {{ form.loop_num.label(class="form-control-label mr-sm-5") }}
+                        {% if form.loop_num.errors %}
+                            {{ form.loop_num(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.loop_num.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                        {% else %}
+                            {{ form.loop_num(class="form-control mr-sm-1 input-sm form-control-sm w-50") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.type_file.label(class="form-control-label mr-sm-5") }}
+                        {% if form.type_file.errors %}
+                            {{ form.type_file(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.type_file.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                        {% else %}
+                            {{ form.type_file(class="form-control mr-sm-1 input-sm form-control-sm w-50") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                    </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}
